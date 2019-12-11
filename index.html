@@ -153,7 +153,7 @@ type Bool = False | True
 
         <section>
             <pre>
-              <code class="elm" data-trim>
+                <code class="elm" data-trim>
 type DifficultyLevel
     = Easy
     | Normal
@@ -166,8 +166,8 @@ type alias Recipe =
     , difficultyLevel : DifficultyLevel
     }
 
-              </code>
-        </pre>
+                </code>
+            </pre>
         </section>
 
         <section>
@@ -228,6 +228,65 @@ thatIsBetter =
             <aside class="notes" data-markdown>
             </aside>
         </section>
+
+
+        <section>
+            <pre>
+                <code class="elm" data-trim>
+type alias Recipe =
+    { title: String
+    , ..
+    , preparationTime : Int
+    , cookingTime : ?
+    }
+                </code>
+
+                <code class="json" data-trim>
+{ title: "foo"
+, preparationTime: 10,
+, cookingTime: null
+}
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <small>!empty?</small> <span>!empty?</span> <big>!empty?</big>
+        </section>
+
+        <section>
+            <pre>
+                <code class="elm" data-trim>
+type alias Recipe =
+    { title: String
+    , ..
+    , preparationTime : Int
+    , cookingTime : Maybe Int
+    }
+
+iceCream : Recipe
+iceCream =
+    { title = "Ice Cream"
+    , ..
+    , preparationTime = 10
+    , cookingTime = Nothing
+    }
+
+pizza : Recipe
+pizza =
+    { title = "Pizza"
+    , ..
+    , preparationTime = 10
+    , cookingTime = Just 15
+    }
+                </code>
+
+            </pre>
+        </section>
+
+
+
+<!--        !!!!!!!!!!!!!!!!!!!! -->
 
          <!-- Unio demo -->
         <section>
