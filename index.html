@@ -327,7 +327,7 @@ type PreparationTimes
 
 viewPreparationTimes : Recipe -> Html msg
 viewPreparationTimes recipe =
-    case preparationTimes of
+    case recipe.preparationTimes of
         NoPreparation ->
             text "No preparation required"
 
@@ -345,130 +345,49 @@ viewPreparationTimes recipe =
         </section>
 
 
-
-<!--        !!!!!!!!!!!!!!!!!!!! -->
-
-         <!-- Unio demo -->
         <section>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/DyzDisv0mNc?rel=0" frameborder="0" allowfullscreen></iframe>
+            <img src="https://user-images.githubusercontent.com/125707/70612612-e927ac80-1c0f-11ea-8ef1-0897c3d98f7f.png" />
+
+            <div>
+                How to model the states of an HTTP request?
+            </div>
+
         </section>
 
-        <!-- Unio Backend -->
         <section>
-          <img src="https://cloud.githubusercontent.com/assets/125707/21800832/fe50264e-d727-11e6-9fe8-6a4d88f379cd.jpg" alt="" />
-        </section>
-
-
-
-      <!-- User type -->
-      <section>
-        <pre>
-          <code class="elm" data-trim>
-type alias Name
-    = String
-
-type UserType
-    = Anonymous
-    | Authenticated Name
-    | Premium Name Date
-          </code>
-        </pre>
-        <aside class="notes" data-markdown>
-          * User type can be either one.
-          * Pending and Authenticated are wrapping a value.
-        </aside>
-      </section>
-
-      <section>
-        <h2>
-          Cart example
-        </h2>
-      </section>
-
-      <section>
-        <h2>Maybe values</h2>
-      </section>
-
-      <!-- User type Url -->
-      <section>
-        <pre>
-          <code class="elm" data-trim>
-type alias User =
-    { avatarUrl : String
-    , name : String
-    }
-
-emptyUser =
-    { avatarUrl = ""
-    , name = ""
-    }
-
-type alias Model =
-    { user : User
-    }
-
-emptyModel =
-    { user = emptyUser
-    }
-          </code>
-        </pre>
-
-        <aside class="notes" data-markdown>
-          * Example without Maybe. But this is wrong.
-        </aside>
-      </section>
-
-      <section>
-        <pre>
-          <code class="elm" data-trim>
-type alias Model =
-    { user : Maybe User
-    }
-
-emptyModel : Model
-emptyModel =
-    { user = Nothing
-    }
-
-modelWithUser : Model
-modelWithUser =
-    { user = Just <| User "https://example.com/avatar" "amitaibu"
-    }
-
-viewUser : Maybe User -> Html msg
-viewUser mUser =
-    case mUser of
-        Nothing ->
-            text "Loading"
-        Just user ->
-            text user.name
-          </code>
-        </pre>
-
-        <aside class="notes" data-markdown>
-          * We know there is no User.
-        </aside>
-      </section>
-
-      <section>
-        <pre>
-          <code class="elm" data-trim>
-type RemoteData e a
+            <pre>
+                <code class="elm" data-trim>
+type WebData a
     = NotAsked
     | Loading
-    | Failure e
+    | Failure Http.Error
     | Success a
 
-type alias WebData a =
-    RemoteData Http.Error a
-          </code>
-        </pre>
+type alias Recipe =
+    { title: String
+    , ..
+    , preparationTimes : WebData PreparationTimes
+    }
 
-        <aside class="notes" data-markdown>
-          * A common pattern in Elm
-          * It helps us to re-think with types
-        </aside>
-      </section>
+
+viewPreparationTimes : Recipe -> Html msg
+viewPreparationTimes recipe =
+    case recipe.preparationTimes of
+        Failure error ->
+            div [] [text "Error loading"]
+
+        Success preparationTimes ->
+            case preparationTimes of
+                NoPreparation ->
+                    text "No preparation required"
+
+                -- ..
+        _ ->
+            div [] [text "Loading ..."]
+
+                </code>
+            </pre>
+        </section>
 
       <section>
         <pre>
