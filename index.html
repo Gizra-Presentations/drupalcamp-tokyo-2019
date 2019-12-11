@@ -374,7 +374,7 @@ viewPreparationTimes : Recipe -> Html msg
 viewPreparationTimes recipe =
     case recipe.preparationTimes of
         Failure error ->
-            div [] [text "Error loading"]
+            text "Error loading"
 
         Success preparationTimes ->
             case preparationTimes of
@@ -383,487 +383,59 @@ viewPreparationTimes recipe =
 
                 -- ..
         _ ->
-            div [] [text "Loading ..."]
+            text "Loading ..."
 
                 </code>
             </pre>
         </section>
 
-      <section>
-        <pre>
-          <code class="elm" data-trim>
-type alias Model =
-    { user : WebData User
-    }
-
-
-emptyModel =
-    { user = NotAsked
-    }
-
-debugUser =
-    { user = Success <| User "https://example.com/avatar" "amitaibu"
-    }
-
-viewUser : WebData User -> Html msg
-viewUser webDataUser =
-    case webDataUser of
-      Success user ->
-          text user.name
-
-      Failure err ->
-          text "Something went wrong"
-
-      _ ->
-          text "Loading..."
-          </code>
-        </pre>
-
-        <aside class="notes" data-markdown>
-          * Using webdata, starting with NotAsked
-          * How easy to put a spinner, because you have the exact state.
-        </aside>
-      </section>
-
-
-            <!-- Yesod -->
-            <section>
-                <img src="https://cloud.githubusercontent.com/assets/125707/20651098/0daf5924-b4e7-11e6-846d-5f8f7a7abe37.jpg" alt="" />
-
-                <aside class="notes" data-markdown>
-                  * Excited about this I was looking at a server side technology that has all those goodies.
-                  * Bigger learning curve.
-                  * We're not runnin this in production, but I'm activlely working on changing that.
-                </aside>
-            </section>
-
-            <!-- api/login-token -->
-            <section>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312337/71cab93e-281f-11e7-81e2-d1dc812e8fa6.jpg" alt="" />
-            </section>
-
-
-            <section>
-              <pre>
-                <code class="yaml" data-trim>
--- config/models
-
-User
-    ident Text
-    password Text Maybe -- Password is optional
-    verkey Text Maybe
-    verified Bool
-    UniqueUser ident
-    deriving Typeable
-
-AccessToken json
-    created UTCTime
-    userId UserId
-    token Text
-    UniqueUserId userId
-    UniqueToken token
-    deriving Eq
-    deriving Show
-
-              </code>
-            </pre>
-
-            <aside class="notes" data-markdown>
-            </aside>
-          </section>
-
-          <section>
-            <pre>
-              <code class="yaml" data-trim>
--- config/routes
-
-/api/login-token LoginTokenR GET
-            </code>
-          </pre>
-
-          <aside class="notes" data-markdown>
-          </aside>
+        <!-- Ingredients list-->
+        <section>
+            <img src="https://user-images.githubusercontent.com/125707/70616357-e9777600-1c16-11ea-835e-9a0645228698.png" />
         </section>
 
+        <section>
+            <pre>
+                <code class="elm" data-trim>
 
-            <section>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312085/a6a42a98-2818-11e7-9479-7e70ab828850.jpg" alt="">
+type alias Ingredient =
+    { name: String
+    , price : Int
+    }
 
-              <aside class="notes" data-markdown>
-              </aside>
-            </section>
+type alias Recipe =
+    { title: String
+    , ..
+    , ingredients : List Ingredient
+    }
 
-            <!-- Profile page -->
-            <section>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312357/cdb73ce0-281f-11e7-88ce-cee5a90a1876.jpg" alt="">
-            </section>
+                </code>
+            </pre>
+        </section>
 
-            <!-- Template -->
-            <section>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312366/f4e21f1a-281f-11e7-9dff-5beb84011a4d.jpg" alt="">
-            </section>
+        <section>
+            map & fold
+        </section>
 
+        <section>
+            <pre>
+                <code class="elm" data-trim>
 
-            <section>
-                <pre>
-                    <code class="php" data-trim>
-drupal_add_css('static/css/bootstrap.css');
-                    </code>
-                </pre>
-                <pre>
-                    <code class="elm" data-trim>
-addStylesheet $ StaticR css_bootstrap_css
-                    </code>
-                </pre>
+viewIngredients : Recipe -> Html msg
+viewIngredients recipe =
+    ul
+        []
+        [ List.map ( \ingredient -> li [] [ text ingredient.name ] ) recipe.ingredients
+        ]
 
-                <aside class="notes" data-markdown>
-                  * When you get a taste of the type safety, hard to stop.
-                  * What can possibly go wrong?
-                </aside>
-            </section>
-
-            <section>
-                <h2>Finally! Drupal (8)!</h2>
-                <aside class="notes" data-markdown>
-                </aside>
-            </section>
+viewTotalPrice : Recipe -> Html msg
+viewTotalPrice recipe =
+    List.foldl ( \ingredient accum -> accum + ingredient.price ) 0 recipe.ingredients
 
 
-            <!-- OG7.x-1.x -->
-            <section>
-              <h4>OG7 1.x</h4>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312125/fff0b214-2819-11e7-9735-7e1687c7e481.jpg" alt="" />
-
-              <aside class="notes" data-markdown>
-                * I've delibretly didn't add "entity" and "node", so it's
-                confusing for you as it was for us back then.
-              </aside>
-            </section>
-
-            <!-- OG7.x-2.x -->
-            <section>
-              <h4>OG7 2.x</h4>
-              <img src="https://cloud.githubusercontent.com/assets/125707/25312121/d78afc3a-2819-11e7-9b42-20a51efbcada.jpg" alt="" />
-
-              <aside class="notes" data-markdown>
-                * Abusing field API, keeping sync between field storage and entity storage
-                so you could decide if to work via field API or via entity API.
-                * I don't know if for that idea I will one day be punished, or that
-                is the punishment.
-              </aside>
-            </section>
-
-
-            <!-- OG8 data structure -->
-            <section>
-              <h4>OG8</h4>
-              <img src="http://www.gizra.com/assets/images/posts/og8-development-mindset/image2.jpg" alt="" />
-              <aside class="notes" data-markdown>
-                * User are not nodes. Pending membership isn't natural for a piece of content.
-                * I don't care about edge cases.
-                * A user is not a node
-              </aside>
-            </section>
-
-            <!-- PR removes code -->
-            <section>
-                <img src="https://cloud.githubusercontent.com/assets/125707/20651123/985dab0c-b4e7-11e6-9ae3-e01104c31cbc.jpg" alt="" />
-                <aside class="notes" data-markdown>
-                    * The benefits of removing code: No bugs, doesn't take time, easy to maintain.
-                    * The mindset: add feature, not reduce from previous version.
-                    * Drupal9 are you in the audience, I'll repeat it for you. We add features...
-                </aside>
-            </section>
-
-            <!-- Safe guards -->
-            <section>
-                <h2>Safe Guards</h2>
-                <pre>
-                  <code class="elm" data-trim>
-        throw new \Exception();
-                  </code>
-
-                </pre>
-
-                <img src="https://cloud.githubusercontent.com/assets/125707/20651142/dca0c8e4-b4e7-11e6-957e-2ee78b2cfc44.jpg" alt="" />
-
-                <aside class="notes" data-markdown>
-                    * But who to prevent wrong data if there's no compiler, or types?
-                </aside>
-            </section>
-
-            <section>
-                <h2>Be your own devil's advocate</h2>
-
-                <ul>
-                    <li>Functional testing</li>
-                    <li>Kernel testing</li>
-                    <li>Unit testing</li>
-                </ul>
-
-                <aside class="notes" data-markdown>
-                    * You might heard in my tone I'm not super excited about D8
-                    the reason is because I don't feel that from a business point of view D8 is more superior than D7. We'll probably reach
-                    it, but not looking at being early adaptors. For headless for example we've already
-                    paved the way with RETful and now we get to enjoy it.
-                    * But I think the tests are something really right.
-                </aside>
-            </section>
-
-      <!-- Functional test -->
-      <section>
-        <pre>
-          <code class="php" data-trim>
-/**
- * Tests the formatter changes by user and membership.
- */
-public function testGroupTab() {
-  $this->drupalLogin($this->user1);
-  $this->drupalGet('group/node/' . $this->group->id() . '/admin');
-  $this->assertResponse(200);
-
-  $this->drupalGet('group/node/' . $this->nonGroup->id() . '/admin');
-  $this->assertResponse(403);
-}
-          </code>
-        </pre>
-      </section>
-
-      <!-- Kernel test -->
-      <section>
-        <pre>
-          <code class="php" data-trim>
-/**
- * Tests access to the create entity form through the user interface.
- *
- * @group og
- * @coversDefaultClass \Drupal\og\Form\GroupSubscribeForm
- */
-class GroupSubscribeFormTest extends KernelTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static $modules = [
-    'system',
-    'user',
-    'field',
-    'node',
-    'og',
-  ];
-
-  /**
-   * A user object.
-   *
-   * @var \Drupal\user\Entity\User
-   */
-  protected $user1;
-
-
-  /**
-   * A group entity.
-   *
-   * @var \Drupal\node\Entity\Node
-   */
-  protected $group1;
-
-  /**
-   * A group entity.
-   *
-   * @var \Drupal\node\Entity\Node
-   */
-  protected $group2;
-
-  /**
-   * A group entity.
-   *
-   * @var \Drupal\node\Entity\Node
-   */
-  protected $group3;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-
-    $this->installConfig(['og']);
-    $this->installEntitySchema('og_membership');
-    $this->installEntitySchema('user');
-    $this->installEntitySchema('node');
-    $this->installSchema('system', 'sequences');
-
-    // Create bundles.
-    $groupBundle1 = Unicode::strtolower($this->randomMachineName());
-    $groupBundle2 = Unicode::strtolower($this->randomMachineName());
-    $groupBundle3 = Unicode::strtolower($this->randomMachineName());
-
-    // Define the entities as groups.
-    Og::groupTypeManager()->addGroup('node', $groupBundle1);
-    Og::groupTypeManager()->addGroup('node', $groupBundle2);
-    Og::groupTypeManager()->addGroup('node', $groupBundle3);
-
-    // Create node author user.
-    $user = User::create(['name' => $this->randomString()]);
-    $user->save();
-
-    // Create groups.
-    $this->group1 = Node::create([
-      'type' => $groupBundle1,
-      'title' => $this->randomString(),
-      'uid' => $user->id(),
-    ]);
-    $this->group1->save();
-
-    $this->group2 = Node::create([
-      'type' => $groupBundle2,
-      'title' => $this->randomString(),
-      'uid' => $user->id(),
-    ]);
-    $this->group2->save();
-
-    // Create an unpublished node, so users won't have access to it.
-    $this->group3 = Node::create([
-      'type' => $groupBundle3,
-      'title' => $this->randomString(),
-      'uid' => $user->id(),
-      'status' => NODE_NOT_PUBLISHED,
-    ]);
-    $this->group3->save();
-
-    // Change the permissions of group to "subscribe".
-    /** @var OgRole $role */
-    $role = OgRole::getRole('node', $groupBundle1, OgRoleInterface::ANONYMOUS);
-    $role
-      ->grantPermission('subscribe')
-      ->save();
-
-    // Change the permissions of group to allow "subscribe without approval".
-    $role = OgRole::getRole('node', $groupBundle2, OgRoleInterface::ANONYMOUS);
-    $role
-      ->grantPermission('subscribe without approval')
-      ->save();
-
-    // Change the permissions of group to allow "subscribe without approval" on
-    // the unpublished node.
-    $role = OgRole::getRole('node', $groupBundle3, OgRoleInterface::ANONYMOUS);
-    $role
-      ->grantPermission('subscribe without approval')
-      ->save();
-
-  }
-
-  /**
-   * Tests subscribe confirmation related text.
-   *
-   * @covers ::isStateActive
-   */
-  public function testIsStateActive() {
-    $user = $this->createUser(['access content']);
-
-    /** @var GroupSubscribeForm $form */
-    $form = \Drupal::entityManager()->getFormObject('og_membership', 'subscribe');
-
-    // Pending membership.
-    $membership_pending = OgMembership::create();
-    $membership_pending
-      ->setGroup($this->group1)
-      ->setUser($user);
-
-    $form->setEntity($membership_pending);
-    $this->assertFalse($form->isStateActive());
-  }
-          </code>
-        </pre>
-      </section>
-
-      <section>
-        <h2>So What Is Wrong with Drupal?</h2>
-
-        <aside class="notes" data-markdown>
-          * How much time do we have?
-          * I'll give an example from OG8
-        </aside>
-      </section>
-
-      <!-- Article create 1 field -->
-      <section>
-        <img src="https://cloud.githubusercontent.com/assets/125707/25322101/7cfcac66-28bc-11e7-9766-7dbe43aad77a.jpg" alt="">
-        <aside class="notes" data-markdown>
-          * No site wide permissions to create article
-          * But OG permissions to create article
-          * Audience field is not required.
-          * We should prevent access bypass.
-        </aside>
-      </section>
-
-      <!-- Article create 2 fields -->
-      <section>
-        <img src="https://cloud.githubusercontent.com/assets/125707/25322081/5971709c-28bc-11e7-8259-2bbb9e08fd29.jpg" alt="">
-        <aside class="notes" data-markdown>
-          * The same thing we love, is the thing we should also worry from
-          * We get it for free
-          * You sit with your team. Should we do this and that. Well, "we get it for free"
-          * But is it really free?
-          * When you will run OG, that security issue I have to cover has a cost in complexity.
-          On each refresh you might be hitting that complexity.
-          * I wrote a group functionlity in Yesod in 5 files. Just what I needed,
-          no more and no less.
-        </aside>
-      </section>
-
-
-      <section>
-          <h2>Port Drupal to Haskell?</h2>
-          <small>Probably no</small>
-
-          <aside class="notes" data-markdown>
-              * Approchable
-              * Huge community
-              * Eco-system, Pantheon/ Platform/ Amazee IO
-              * Monthly releases
-              * Wednesday security releases
-              * DrupalCon, Drupal Association, Drupal Drama
-              * Drush/ Drupal console
-              * Tons of code we didn't have to write, or test
-              * 15 years of experience!
-              * I remember Dris saying back in CPH that we're tied in the hip to the PHP community.
-              * Are we? Are we because we are constantly choosing, or because we're affraid of questioning.
-              * I'm not advocating to let go of PHP, but about letting go of the fears. Drupal has been in its safe zone
-              for a long time.
-              * I'll tell what I tell my clients. You problem is not code. Lets say we have the perfect system, whatever
-              we want will be done tomorrow. What would it be.
-              * And also, how would I know I succedded or failed. What's the matrix.
-              * That talk is quicker, and adaptive, like coding but it's less expensive in time.
-          </aside>
-      </section>
-
-
-      <!-- Drupal Elm Starter -->
-      <section>
-        <img src="https://cloud.githubusercontent.com/assets/125707/21802323/fcb4e440-d72d-11e6-8cb0-c90d9e0d34f8.jpg" alt="" />
-
-        <aside class="notes" data-markdown>
-            * Strong on testing.
-            * Webdriver (Aron Novak)
-        </aside>
-      </section>
-
-
-      <!-- Last slide -->
-      <section data-background="https://cloud.githubusercontent.com/assets/125707/11408842/6abc3708-93c4-11e5-8515-bf92a59cf8ea.jpg">
-        <div style="background-color: black; opacity: 0.85; padding: 20px;">
-          <span style="font-family: Abril Fatface; color: #e27058; font-size: 50px;">
-            gizra
-          </span>
-        </div>
-
-        <aside class="notes" data-markdown>
-          * Evaluation
-          * If I got you excited, and what I said made sense, and you happen to
-          be amazing developers - we're hiring.
-        </aside>
-      </section>
+                </code>
+            </pre>
+        </section>
 
 
     </div>
