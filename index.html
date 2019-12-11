@@ -251,7 +251,7 @@ type alias Recipe =
         </section>
 
         <section>
-            <small>!empty?</small> <span>!empty?</span> <big>!empty?</big>
+            <h2>!empty ?</h2>
         </section>
 
         <section>
@@ -311,6 +311,35 @@ pizza =
     , ..
     , preparationTimes = Preparation 10 (Just 15)
     }
+                </code>
+
+            </pre>
+        </section>
+
+
+        <section>
+            <pre>
+                <code class="elm" data-trim>
+                <code class="elm" data-trim>
+type PreparationTimes
+    = NoPreparation
+    | Preparation Int (Maybe Int)
+
+
+viewPreparationTimes : Recipe -> Html msg
+viewPreparationTimes recipe =
+    case preparationTimes of
+        NoPreparation ->
+            text "No preparation required"
+
+        Preparation time Nothing ->
+            text "Takes " ++ (String.fromInt time) ++
+                    "minutes, but no cooking"
+
+        Preparation time (Just cookingTime) ->
+            text "Takes " ++ (String.fromInt time) ++
+                    " minutes and " ++ (String.fromInt cookingTime) ++
+                    " minutes for cooking"
                 </code>
 
             </pre>
