@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Gizra</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="css/custom.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet" type="text/css">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+            <section>
+              <h1>
+                How We Develop Organic Groups 8 after 2 Years with Elm
+              </h1>
+              <aside class="notes" data-markdown>
+                * The short answer is very very slow. Any questions? Thank you for coming. Bye bye.
+              </aside>
+            </section>
+
+            <section>
+              <h1>#empathy</h1>
+              <aside class="notes" data-markdown>
+                * I just wanted to started the presentation in an akward manner.
+                * and it seems we are off to a great start.
+              </aside>
+            </section>
+
+            <section>
+              <h1>
+                How We Develop Organic Groups 8 after 2 Years with Elm
+              </h1>
+              <aside class="notes" data-markdown>
+                * So if you are in the room just checking it out really quik, The short answer is very very slow. Any questions? Thank you for coming. Bye bye.
+                * If that's not enough info, there's a longer version. But you will have to lay back, and
+                I will need to take a few steps back and even a few to the side.
+                * To the path me, and as a result Gizra, have been walking on in the pat 2 years.
+              </aside>
+            </section>
+
+            <!-- About  -->
+            <section data-background="https://cloud.githubusercontent.com/assets/125707/12092123/dd49649a-b303-11e5-9355-e49a3881f5bd.png">
+                <span style="background-color: black; opacity: 0.85; padding: 20px 40px;">
+                    <span style="font-family: Abril Fatface; color: #e27058; font-size: 50px;">
+                        gizra
+                    </span>
+                    <span>// @amitaibu</span>
+                </span>
+
+                <aside class="notes" data-markdown>
+                  * CTO, co-owner of Gizra
+                  * Fancy clients.
+                  * And then, like any sales pitch I'm doing, 60 seconds later we talk
+                  about how most IT projects fail.
+                </aside>
+            </section>
+
+            <section>
+              <h2>Defintion of success</h2>
+      				<ul>
+      					<li>On Time</li>
+      					<li>On Budget</li>
+      					<li>Customer is Happy</li>
+      				</ul>
+              <aside class="notes" data-markdown>
+                * When I say fail, I mean they don't answer one of the three.
+                * Unholy trinity - all of them
+                * It will be published, but later with more money and more frustration
+              </aside>
+            </section>
+
+
+            <section>
+              <h2>How to Solve it</h2>
+      				<ul>
+      					<li>Communication</li>
+      					<li>Setting expectations</li>
+      				</ul>
+              <aside class="notes" data-markdown>
+                * For a long time I thought that was the solution.
+                * I now think it's only the technicque.
+              </aside>
+            </section>
+
+            <section>
+              <h2>How to Solve it, 2017</h2>
+      				<ul>
+      					<li>Find and develop only the essence</li>
+      					<li>Timebox the efforts</li>
+      				</ul>
+
+              <aside class="notes" data-markdown>
+                * Basically it means, don't listen to your clients.
+                * I make dinner to my kids. And if you have kids maybe you know it - lets see if there will be a few nods in the audience.
+                * I know that at that point of time they can handle only fruits.
+                * So I offer fruits, but they insist also on Sandwich. Pizza. Pasta. Salad. And cake. And Milkshake. And potato chips
+                and also that slimmy sugary thingy I later need to clean up. And tortia. And biscuits. And Salmon. Oh boy, they claim they are so into Salmon.
+                And Vanilla cake, and some chocolate to balance it. And yogurt, because why not.
+                * And they really insist. And I know it's going to end bad, but I try to be a good dad.
+                * But those small, manipulative bastards - and honest to god I'm not even sure if they are really mine -
+                it's obvious they get kick out of it, eventhough it's clear they are not going to eat any of it.
+                * And then my wife joins, and starts with her accusations and going all crazy
+                * and then I go crazy, and eventually I start screeming at my wife "you and your mother are going to take me down the my grave!"
+                * So I guess projects are a bit like that, right? We need to serve our clients only fruits. Only what they really want and can afford.
+                * Project is the sum of it's issues
+                * Setting the hours is setting the expectations
+                * Also self fullfiling prophesy - developer can code for ever.
+                * Everybody can set estimation
+                * Time is more important than the task
+                * Escalation
+                * It applies also to contribution, where instead of money you have moral.
+              </aside>
+            </section>
+
+            <section>
+              <h2>Cost of bugs</h2>
+              <aside class="notes" data-markdown>
+                  * The thing that ruins our plans and estimation is bugs.
+                  * eww - bugs. For the crowd at home, I'm shaking my hand furiously.
+                  * Bugs are very costly (even more than they might appear)
+                  * Need to fix, costs you money
+                  * Takes your time - deadline
+                  * Client disapointed. Mechanic example
+                  * As developers we expect the client be ok over and over with the fact that breaks are not working.
+                  * Devs/ Account manager moral
+              </aside>
+            </section>
+
+            <section>
+              <h2>Correctness</h2>
+              <small>and my expectations from computers</small>
+              <aside class="notes" data-markdown>
+                  * My expectations of computer and programming languages after being in the
+                  functional programming world for 2 years.
+              </aside>
+            </section>
+
+            <!-- Unio demo -->
+            <section>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/DyzDisv0mNc?rel=0" frameborder="0" allowfullscreen></iframe>
+            </section>
+
+            <!-- Unio Backend -->
+            <section>
+              <img src="https://cloud.githubusercontent.com/assets/125707/21800832/fe50264e-d727-11e6-9fe8-6a4d88f379cd.jpg" alt="" />
+            </section>
+
+            <section>
+                <h2>Elm</h2>
+                <small>Generate JavaScript with great performance and no runtime exceptions</small>
+
+                <aside class="notes" data-markdown>
+                    * Frustrated with Angular, I was poking around React, and soon found myself with Elm
+                    * Functional programming language. It compiles to JS. But it's not Typescirpt
+                    * It doesn't try to fix JS. But rather say, JS is wonderful, but as humans we shouldn't interact with it.
+                    * Staticlly typed. It has an amazing compiler which makes sure there are no runtime exceptions. It's immutable.
+                    * In general after years of Angualr 1, and playing a bit with React, Front end has became fun again.
+                    * Development is much faster and more stable than ever, Admitedlly, ever since I divied into Elm and FP I started using it I've started seeing the flaws in Drupal.
+                </aside>
+            </section>
+
+      <!-- Counter Example -->
+      <section>
+        <img src="https://cloud.githubusercontent.com/assets/125707/9739824/2fcc8cd0-565a-11e5-8024-0d01200773cd.jpg" />
+      </section>
+
+      <section>
+        <pre style="width: 100%;"><code data-trim class>
+module Counter exposing (..)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
+
+-- MODEL
+
+type alias Model =
+    Int
+
+emptyModel : Model
+emptyModel =
+    0
+
+-- UPDATE
+
+type Msg
+    = Decrement
+    | Increment
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        Decrement ->
+            ( model - 1
+            , Cmd.none
+            )
+
+        Increment ->
+            ( model + 1
+            , Cmd.none
+            )
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+    div []
+        [ button [ onClick Decrement ] [ text "-" ]
+        , div [] [ text (toString model) ]
+        , button [ onClick Increment ] [ text "+" ]
+        ]
+
+        </code></pre>
+        <aside class="notes" data-markdown>
+          * Mandatory counter example, but soon we'll go over fancier examples.
+       </aside>
+      </section>
+
+
+      <section>
+        <h3>Compile Error Vs Runtime Mistakes</h3>
+
+        <aside class="notes" data-markdown>
+          * No Runtime exceptions in Elm
+          * Shift as much runtime mistakes to compile time error
+        </aside>
+      </section>
+
+      <section>
+        <h2>Types 101</h2>
+      </section>
+
+      <!-- Bool type -->
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type Bool = False | True
+          </code>
+        </pre>
+      </section>
+
+      <!-- User type -->
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type alias Name
+    = String
+
+type UserType
+    = Anonymous
+    | Authenticated Name
+    | Premium Name Date
+          </code>
+        </pre>
+        <aside class="notes" data-markdown>
+          * User type can be either one.
+          * Pending and Authenticated are wrapping a value.
+        </aside>
+      </section>
+
+      <section>
+        <h2>
+          Cart example
+        </h2>
+      </section>
+
+      <section>
+        <h2>Maybe values</h2>
+      </section>
+
+      <!-- User type Url -->
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type alias User =
+    { avatarUrl : String
+    , name : String
+    }
+
+emptyUser =
+    { avatarUrl = ""
+    , name = ""
+    }
+
+type alias Model =
+    { user : User
+    }
+
+emptyModel =
+    { user = emptyUser
+    }
+          </code>
+        </pre>
+
+        <aside class="notes" data-markdown>
+          * Example without Maybe. But this is wrong.
+        </aside>
+      </section>
+
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type alias Model =
+    { user : Maybe User
+    }
+
+emptyModel : Model
+emptyModel =
+    { user = Nothing
+    }
+
+modelWithUser : Model
+modelWithUser =
+    { user = Just <| User "https://example.com/avatar" "amitaibu"
+    }
+
+viewUser : Maybe User -> Html msg
+viewUser mUser =
+    case mUser of
+        Nothing ->
+            text "Loading"
+        Just user ->
+            text user.name
+          </code>
+        </pre>
+
+        <aside class="notes" data-markdown>
+          * We know there is no User.
+        </aside>
+      </section>
+
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type RemoteData e a
+    = NotAsked
+    | Loading
+    | Failure e
+    | Success a
+
+type alias WebData a =
+    RemoteData Http.Error a
+          </code>
+        </pre>
+
+        <aside class="notes" data-markdown>
+          * A common pattern in Elm
+          * It helps us to re-think with types
+        </aside>
+      </section>
+
+      <section>
+        <pre>
+          <code class="elm" data-trim>
+type alias Model =
+    { user : WebData User
+    }
+
+
+emptyModel =
+    { user = NotAsked
+    }
+
+debugUser =
+    { user = Success <| User "https://example.com/avatar" "amitaibu"
+    }
+
+viewUser : WebData User -> Html msg
+viewUser webDataUser =
+    case webDataUser of
+      Success user ->
+          text user.name
+
+      Failure err ->
+          text "Something went wrong"
+
+      _ ->
+          text "Loading..."
+          </code>
+        </pre>
+
+        <aside class="notes" data-markdown>
+          * Using webdata, starting with NotAsked
+          * How easy to put a spinner, because you have the exact state.
+        </aside>
+      </section>
+
+
+            <!-- Yesod -->
+            <section>
+                <img src="https://cloud.githubusercontent.com/assets/125707/20651098/0daf5924-b4e7-11e6-846d-5f8f7a7abe37.jpg" alt="" />
+
+                <aside class="notes" data-markdown>
+                  * Excited about this I was looking at a server side technology that has all those goodies.
+                  * Bigger learning curve.
+                  * We're not runnin this in production, but I'm activlely working on changing that.
+                </aside>
+            </section>
+
+            <!-- api/login-token -->
+            <section>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312337/71cab93e-281f-11e7-81e2-d1dc812e8fa6.jpg" alt="" />
+            </section>
+
+
+            <section>
+              <pre>
+                <code class="yaml" data-trim>
+-- config/models
+
+User
+    ident Text
+    password Text Maybe -- Password is optional
+    verkey Text Maybe
+    verified Bool
+    UniqueUser ident
+    deriving Typeable
+
+AccessToken json
+    created UTCTime
+    userId UserId
+    token Text
+    UniqueUserId userId
+    UniqueToken token
+    deriving Eq
+    deriving Show
+
+              </code>
+            </pre>
+
+            <aside class="notes" data-markdown>
+            </aside>
+          </section>
+
+          <section>
+            <pre>
+              <code class="yaml" data-trim>
+-- config/routes
+
+/api/login-token LoginTokenR GET
+            </code>
+          </pre>
+
+          <aside class="notes" data-markdown>
+          </aside>
+        </section>
+
+
+            <section>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312085/a6a42a98-2818-11e7-9479-7e70ab828850.jpg" alt="">
+
+              <aside class="notes" data-markdown>
+              </aside>
+            </section>
+
+            <!-- Profile page -->
+            <section>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312357/cdb73ce0-281f-11e7-88ce-cee5a90a1876.jpg" alt="">
+            </section>
+
+            <!-- Template -->
+            <section>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312366/f4e21f1a-281f-11e7-9dff-5beb84011a4d.jpg" alt="">
+            </section>
+
+
+            <section>
+                <pre>
+                    <code class="php" data-trim>
+drupal_add_css('static/css/bootstrap.css');
+                    </code>
+                </pre>
+                <pre>
+                    <code class="elm" data-trim>
+addStylesheet $ StaticR css_bootstrap_css
+                    </code>
+                </pre>
+
+                <aside class="notes" data-markdown>
+                  * When you get a taste of the type safety, hard to stop.
+                  * What can possibly go wrong?
+                </aside>
+            </section>
+
+            <section>
+                <h2>Finally! Drupal (8)!</h2>
+                <aside class="notes" data-markdown>
+                </aside>
+            </section>
+
+
+            <!-- OG7.x-1.x -->
+            <section>
+              <h4>OG7 1.x</h4>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312125/fff0b214-2819-11e7-9735-7e1687c7e481.jpg" alt="" />
+
+              <aside class="notes" data-markdown>
+                * I've delibretly didn't add "entity" and "node", so it's
+                confusing for you as it was for us back then.
+              </aside>
+            </section>
+
+            <!-- OG7.x-2.x -->
+            <section>
+              <h4>OG7 2.x</h4>
+              <img src="https://cloud.githubusercontent.com/assets/125707/25312121/d78afc3a-2819-11e7-9b42-20a51efbcada.jpg" alt="" />
+
+              <aside class="notes" data-markdown>
+                * Abusing field API, keeping sync between field storage and entity storage
+                so you could decide if to work via field API or via entity API.
+                * I don't know if for that idea I will one day be punished, or that
+                is the punishment.
+              </aside>
+            </section>
+
+
+            <!-- OG8 data structure -->
+            <section>
+              <h4>OG8</h4>
+              <img src="http://www.gizra.com/assets/images/posts/og8-development-mindset/image2.jpg" alt="" />
+              <aside class="notes" data-markdown>
+                * User are not nodes. Pending membership isn't natural for a piece of content.
+                * I don't care about edge cases.
+                * A user is not a node
+              </aside>
+            </section>
+
+            <!-- PR removes code -->
+            <section>
+                <img src="https://cloud.githubusercontent.com/assets/125707/20651123/985dab0c-b4e7-11e6-9ae3-e01104c31cbc.jpg" alt="" />
+                <aside class="notes" data-markdown>
+                    * The benefits of removing code: No bugs, doesn't take time, easy to maintain.
+                    * The mindset: add feature, not reduce from previous version.
+                    * Drupal9 are you in the audience, I'll repeat it for you. We add features...
+                </aside>
+            </section>
+
+            <!-- Safe guards -->
+            <section>
+                <h2>Safe Guards</h2>
+                <pre>
+                  <code class="elm" data-trim>
+        throw new \Exception();
+                  </code>
+
+                </pre>
+
+                <img src="https://cloud.githubusercontent.com/assets/125707/20651142/dca0c8e4-b4e7-11e6-957e-2ee78b2cfc44.jpg" alt="" />
+
+                <aside class="notes" data-markdown>
+                    * But who to prevent wrong data if there's no compiler, or types?
+                </aside>
+            </section>
+
+            <section>
+                <h2>Be your own devil's advocate</h2>
+
+                <ul>
+                    <li>Functional testing</li>
+                    <li>Kernel testing</li>
+                    <li>Unit testing</li>
+                </ul>
+
+                <aside class="notes" data-markdown>
+                    * You might heard in my tone I'm not super excited about D8
+                    the reason is because I don't feel that from a business point of view D8 is more superior than D7. We'll probably reach
+                    it, but not looking at being early adaptors. For headless for example we've already
+                    paved the way with RETful and now we get to enjoy it.
+                    * But I think the tests are something really right.
+                </aside>
+            </section>
+
+      <!-- Functional test -->
+      <section>
+        <pre>
+          <code class="php" data-trim>
+/**
+ * Tests the formatter changes by user and membership.
+ */
+public function testGroupTab() {
+  $this->drupalLogin($this->user1);
+  $this->drupalGet('group/node/' . $this->group->id() . '/admin');
+  $this->assertResponse(200);
+
+  $this->drupalGet('group/node/' . $this->nonGroup->id() . '/admin');
+  $this->assertResponse(403);
+}
+          </code>
+        </pre>
+      </section>
+
+      <!-- Kernel test -->
+      <section>
+        <pre>
+          <code class="php" data-trim>
+/**
+ * Tests access to the create entity form through the user interface.
+ *
+ * @group og
+ * @coversDefaultClass \Drupal\og\Form\GroupSubscribeForm
+ */
+class GroupSubscribeFormTest extends KernelTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $modules = [
+    'system',
+    'user',
+    'field',
+    'node',
+    'og',
+  ];
+
+  /**
+   * A user object.
+   *
+   * @var \Drupal\user\Entity\User
+   */
+  protected $user1;
+
+
+  /**
+   * A group entity.
+   *
+   * @var \Drupal\node\Entity\Node
+   */
+  protected $group1;
+
+  /**
+   * A group entity.
+   *
+   * @var \Drupal\node\Entity\Node
+   */
+  protected $group2;
+
+  /**
+   * A group entity.
+   *
+   * @var \Drupal\node\Entity\Node
+   */
+  protected $group3;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    $this->installConfig(['og']);
+    $this->installEntitySchema('og_membership');
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
+    $this->installSchema('system', 'sequences');
+
+    // Create bundles.
+    $groupBundle1 = Unicode::strtolower($this->randomMachineName());
+    $groupBundle2 = Unicode::strtolower($this->randomMachineName());
+    $groupBundle3 = Unicode::strtolower($this->randomMachineName());
+
+    // Define the entities as groups.
+    Og::groupTypeManager()->addGroup('node', $groupBundle1);
+    Og::groupTypeManager()->addGroup('node', $groupBundle2);
+    Og::groupTypeManager()->addGroup('node', $groupBundle3);
+
+    // Create node author user.
+    $user = User::create(['name' => $this->randomString()]);
+    $user->save();
+
+    // Create groups.
+    $this->group1 = Node::create([
+      'type' => $groupBundle1,
+      'title' => $this->randomString(),
+      'uid' => $user->id(),
+    ]);
+    $this->group1->save();
+
+    $this->group2 = Node::create([
+      'type' => $groupBundle2,
+      'title' => $this->randomString(),
+      'uid' => $user->id(),
+    ]);
+    $this->group2->save();
+
+    // Create an unpublished node, so users won't have access to it.
+    $this->group3 = Node::create([
+      'type' => $groupBundle3,
+      'title' => $this->randomString(),
+      'uid' => $user->id(),
+      'status' => NODE_NOT_PUBLISHED,
+    ]);
+    $this->group3->save();
+
+    // Change the permissions of group to "subscribe".
+    /** @var OgRole $role */
+    $role = OgRole::getRole('node', $groupBundle1, OgRoleInterface::ANONYMOUS);
+    $role
+      ->grantPermission('subscribe')
+      ->save();
+
+    // Change the permissions of group to allow "subscribe without approval".
+    $role = OgRole::getRole('node', $groupBundle2, OgRoleInterface::ANONYMOUS);
+    $role
+      ->grantPermission('subscribe without approval')
+      ->save();
+
+    // Change the permissions of group to allow "subscribe without approval" on
+    // the unpublished node.
+    $role = OgRole::getRole('node', $groupBundle3, OgRoleInterface::ANONYMOUS);
+    $role
+      ->grantPermission('subscribe without approval')
+      ->save();
+
+  }
+
+  /**
+   * Tests subscribe confirmation related text.
+   *
+   * @covers ::isStateActive
+   */
+  public function testIsStateActive() {
+    $user = $this->createUser(['access content']);
+
+    /** @var GroupSubscribeForm $form */
+    $form = \Drupal::entityManager()->getFormObject('og_membership', 'subscribe');
+
+    // Pending membership.
+    $membership_pending = OgMembership::create();
+    $membership_pending
+      ->setGroup($this->group1)
+      ->setUser($user);
+
+    $form->setEntity($membership_pending);
+    $this->assertFalse($form->isStateActive());
+  }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>So What Is Wrong with Drupal?</h2>
+
+        <aside class="notes" data-markdown>
+          * How much time do we have?
+          * I'll give an example from OG8
+        </aside>
+      </section>
+
+      <!-- Article create 1 field -->
+      <section>
+        <img src="https://cloud.githubusercontent.com/assets/125707/25322101/7cfcac66-28bc-11e7-9766-7dbe43aad77a.jpg" alt="">
+        <aside class="notes" data-markdown>
+          * No site wide permissions to create article
+          * But OG permissions to create article
+          * Audience field is not required.
+          * We should prevent access bypass.
+        </aside>
+      </section>
+
+      <!-- Article create 2 fields -->
+      <section>
+        <img src="https://cloud.githubusercontent.com/assets/125707/25322081/5971709c-28bc-11e7-8259-2bbb9e08fd29.jpg" alt="">
+        <aside class="notes" data-markdown>
+          * The same thing we love, is the thing we should also worry from
+          * We get it for free
+          * You sit with your team. Should we do this and that. Well, "we get it for free"
+          * But is it really free?
+          * When you will run OG, that security issue I have to cover has a cost in complexity.
+          On each refresh you might be hitting that complexity.
+          * I wrote a group functionlity in Yesod in 5 files. Just what I needed,
+          no more and no less.
+        </aside>
+      </section>
+
+
+      <section>
+          <h2>Port Drupal to Haskell?</h2>
+          <small>Probably no</small>
+
+          <aside class="notes" data-markdown>
+              * Approchable
+              * Huge community
+              * Eco-system, Pantheon/ Platform/ Amazee IO
+              * Monthly releases
+              * Wednesday security releases
+              * DrupalCon, Drupal Association, Drupal Drama
+              * Drush/ Drupal console
+              * Tons of code we didn't have to write, or test
+              * 15 years of experience!
+              * I remember Dris saying back in CPH that we're tied in the hip to the PHP community.
+              * Are we? Are we because we are constantly choosing, or because we're affraid of questioning.
+              * I'm not advocating to let go of PHP, but about letting go of the fears. Drupal has been in its safe zone
+              for a long time.
+              * I'll tell what I tell my clients. You problem is not code. Lets say we have the perfect system, whatever
+              we want will be done tomorrow. What would it be.
+              * And also, how would I know I succedded or failed. What's the matrix.
+              * That talk is quicker, and adaptive, like coding but it's less expensive in time.
+          </aside>
+      </section>
+
+
+      <!-- Drupal Elm Starter -->
+      <section>
+        <img src="https://cloud.githubusercontent.com/assets/125707/21802323/fcb4e440-d72d-11e6-8cb0-c90d9e0d34f8.jpg" alt="" />
+
+        <aside class="notes" data-markdown>
+            * Strong on testing.
+            * Webdriver (Aron Novak)
+        </aside>
+      </section>
+
+
+      <!-- Last slide -->
+      <section data-background="https://cloud.githubusercontent.com/assets/125707/11408842/6abc3708-93c4-11e5-8515-bf92a59cf8ea.jpg">
+        <div style="background-color: black; opacity: 0.85; padding: 20px;">
+          <span style="font-family: Abril Fatface; color: #e27058; font-size: 50px;">
+            gizra
+          </span>
+        </div>
+
+        <aside class="notes" data-markdown>
+          * Evaluation
+          * If I got you excited, and what I said made sense, and you happen to
+          be amazing developers - we're hiring.
+        </aside>
+      </section>
+
+
+    </div>
+
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: false,
+      progress: false,
+      history: true,
+      center: true,
+
+      transition: 'none', // none/fade/slide/convex/concave/zoom
+
+      // Optional reveal.js plugins
+      dependencies: [{
+        src: 'lib/js/classList.js',
+        condition: function() {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }, {
+        src: 'plugin/zoom-js/zoom.js',
+        async: true
+      }, {
+        src: 'plugin/notes/notes.js',
+        async: true
+      }, {
+        src: 'socket.io/socket.io.js',
+        async: true
+      }, {
+        src: 'plugin/notes-server/client.js',
+        async: true
+      }]
+    });
+  </script>
+
+</body>
+
+</html>
