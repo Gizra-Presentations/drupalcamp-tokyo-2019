@@ -152,7 +152,6 @@ type Bool = False | True
         </pre>
         </section>
 
-        <!-- Bool type -->
         <section>
             <pre>
               <code class="elm" data-trim>
@@ -172,8 +171,56 @@ type alias Recipe =
         </pre>
         </section>
 
+        <section>
+            <div>If something can go wrong, it will</div>
+            <small>Murphy's law</small>
+            <pre>
+              <code class="elm" data-trim>
+type alias Recipe =
+    { title: String
+    , ..
+    , isCarnivore : Bool
+    , isVegetarian : Bool
+    , isVegan : Bool
+    }
 
+iAmConfused : Recipe
+iAmConfused =
+    { title = "A vegan steak?!"
+    , ..
+    , isCarnivore = True
+    , isVegetarian = False
+    , isVegan = True
+    }
 
+              </code>
+        </pre>
+        </section>
+
+        <section>
+            <pre>
+              <code class="elm" data-trim>
+type DietaryRestriction
+    = Carnivore
+    | Vegetarian
+    | Vegan
+
+type alias Recipe =
+    { title: String
+    , ..
+    , dietaryRestriction : DietaryRestriction
+    }
+
+thatIsBetter : Recipe
+thatIsBetter =
+    { title = "A vegan steak!"
+    , ..
+    , dietaryRestriction = Vegan
+    }
+
+              </code>
+        </pre>
+        </section>
 
          <!-- Unio demo -->
         <section>
