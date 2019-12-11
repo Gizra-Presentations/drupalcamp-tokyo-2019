@@ -284,6 +284,38 @@ pizza =
             </pre>
         </section>
 
+        <section>
+            <pre>
+                <code class="elm" data-trim>
+type PreparationTimes
+    = NoPreparation
+    | Preparation Int (Maybe Int)
+
+
+type alias Recipe =
+    { title: String
+    , ..
+    , preparationTimes : PreparationTimes
+    }
+
+iceCreamFromRefrigerator : Recipe
+iceCreamFromRefrigerator =
+    { title = "Ice Cream for lazy people"
+    , ..
+    , preparationTimes = NoPreparation
+    }
+
+pizza : Recipe
+pizza =
+    { title = "Pizza"
+    , ..
+    , preparationTimes = Preparation 10 (Just 15)
+    }
+                </code>
+
+            </pre>
+        </section>
+
 
 
 <!--        !!!!!!!!!!!!!!!!!!!! -->
