@@ -429,12 +429,17 @@ viewIngredients : Recipe -> Html msg
 viewIngredients recipe =
     ul
         []
-        [ List.map ( \ingredient -> li [] [ text ingredient.name ] ) recipe.ingredients
+        [ List.map
+              ( \ingredient -> li [] [ text ingredient.name ] )
+              recipe.ingredients
         ]
 
 viewTotalPrice : Recipe -> Html msg
 viewTotalPrice recipe =
-    List.foldl ( \ingredient accum -> accum + ingredient.price ) 0 recipe.ingredients
+    List.foldl
+        ( \ingredient accum -> accum + ingredient.price )
+        0
+        recipe.ingredients
 
 
                 </code>
@@ -528,9 +533,13 @@ viewTotalPrice recipe =
             <img src="https://user-images.githubusercontent.com/125707/70618878-8557b080-1c1c-11ea-9f2f-761b5312a0eb.png">
         </section>
 
+        <!-- Single recipe-->
+        <section>
+            <img src="https://user-images.githubusercontent.com/125707/70629769-2c474700-1c33-11ea-9f83-c07b882cacf0.png" />
 
-
-
+            <aside class="notes" data-markdown>
+            </aside>
+        </section>
 
     </div>
 
